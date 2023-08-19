@@ -6,13 +6,13 @@
 
 /* You can override the default Infima variables here. */
 :root {
-  --ifm-color-primary: #85472E;
-  --ifm-color-primary-dark: #783F29;
-  --ifm-color-primary-darker: #703C27;
-  --ifm-color-primary-darkest: #5C301F;
-  --ifm-color-primary-light: #914E33;
-  --ifm-color-primary-lighter: #995236;
-  --ifm-color-primary-lightest: #AD5D3D;
+  --ifm-color-primary: #C56F55;
+  --ifm-color-primary-dark: #C2684D;
+  --ifm-color-primary-darker: #BF6449;
+  --ifm-color-primary-darkest: #B6593D;
+  --ifm-color-primary-light: #C6765E;
+  --ifm-color-primary-lighter: #C97B65;
+  --ifm-color-primary-lightest: #CE8872;
   --ifm-code-font-size: 95%;
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.1);
 }
@@ -29,6 +29,10 @@
   --docusaurus-highlighted-code-line-bg: rgba(0, 0, 0, 0.3);
 }
 
-.aa-DetachedSearchButtonPlaceholder, .aa-DetachedSearchButtonQuery {
-  margin: 0 10px;
+[data-theme='dark'] .navbar__logo img {
+  filter: invert(1);
+}
+
+.navbar__search-input {
+  border-radius: 4px;
 }

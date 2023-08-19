@@ -1,7 +1,9 @@
 // @ts-check
 // Note: type annotations allow type checking and IDEs autocompletion
 
+// @ts-ignore
 const lightCodeTheme = require('prism-react-renderer/themes/github');
+// @ts-ignore
 const darkCodeTheme = require('prism-react-renderer/themes/dracula');
 
 /** @type {import('@docusaurus/types').Config} */
@@ -34,6 +36,18 @@ const config = {
     locales: ['en'],
   },
 
+  themes: [
+    [
+      // @ts-ignore
+      require.resolve("@easyops-cn/docusaurus-search-local"),
+      /** @type {import("@easyops-cn/docusaurus-search-local").PluginOptions} */
+      // @ts-ignore
+      ({
+        hashed: true,
+      }),
+    ]
+  ],
+
   presets: [
     [
       'classic',
@@ -43,7 +57,7 @@ const config = {
           path: "UILib-docs",
           routeBasePath: "/uilib-docs",
           sidebarPath: require.resolve('./sidebars.js'),
-          editUrl: 'https://github.com/Mopsgamer/mopsgamer.github.io',
+          editUrl: 'https://github.com/Mopsgamer/mopsgamer.github.io/tree/main',
         },
         theme: {
           customCss: require.resolve('./src/css/custom.css'),
@@ -90,7 +104,6 @@ const config = {
         ],
       },
       footer: {
-        style: 'dark',
         links: [
           {
             title: 'Docs',
@@ -128,14 +141,6 @@ const config = {
       },
     }),
 
-  plugins: [
-    [
-      require.resolve("@cmfcmf/docusaurus-search-local"),
-      {
-        // Options here
-      },
-    ],
-  ],
 };
 
 module.exports = config;
