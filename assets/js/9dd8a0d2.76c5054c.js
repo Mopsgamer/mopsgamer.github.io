@@ -1,1 +1,0 @@
-"use strict";(self.webpackChunkmopsgamer_github_io=self.webpackChunkmopsgamer_github_io||[]).push([[54],{7275:(e,t,u)=>{u.r(t),u.d(t,{default:()=>s});var i=u(7294),r=u(6550);function s(){return i.createElement(r.l_,{to:"/uilib-docs"})}}}]);
