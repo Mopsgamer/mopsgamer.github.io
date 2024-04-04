@@ -30,7 +30,7 @@
 }
 
 [data-theme='dark'] .navbar__logo img {
-  filter: invert(1);
+  filter: invert(0);
 }
 
 .navbar__search-input {
