@@ -9,3 +9,14 @@
   height: 200px;
   width: 200px;
 }
+
+.link-button {
+  cursor: pointer;
+  width: 100%;
+  background-color: var(--ifm-color-primary);
+  border-radius: var(--ifm-button-border-radius);
+  border: thin var(--ifm-button-border-color) solid;
+  padding: var(--ifm-button-padding-vertical) var(--ifm-button-padding-horizontal);
+  font-weight: var(--ifm-button-font-weight);
+  color: var(--white);
+}
