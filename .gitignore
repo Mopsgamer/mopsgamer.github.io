@@ -3,6 +3,7 @@
 
 # Production
 /build
+/docs/view-ignored
 
 # Generated files
 .docusaurus

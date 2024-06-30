@@ -1,5 +1,5 @@
-import {themes as prismThemes} from 'prism-react-renderer';
-import type {Config} from '@docusaurus/types';
+import { themes as prismThemes } from 'prism-react-renderer';
+import type { Config } from '@docusaurus/types';
 import type * as Preset from '@docusaurus/preset-classic';
 
 const config: Config = {
@@ -31,6 +31,15 @@ const config: Config = {
 		locales: ['en'],
 	},
 
+	// plugins: [
+	// 	[
+	// 		"@docusaurus/plugin-content-docs",
+	// 		{
+
+	// 		} satisfies PluginContentDocs.Options
+	// 	]
+	// ],
+
 	presets: [
 		[
 			'classic',
@@ -53,19 +62,29 @@ const config: Config = {
 				alt: 'mops-avatar',
 				src: 'img/mops-avatar.jpg',
 			},
+			items: [
+				{
+					label: "My socials",
+					items: [
+						{ label: "GitHub", to: "https://github.com/Mopsgamer" },
+						{ label: "NPM Registry", to: "https://www.npmjs.com/~mopsgamer" }
+					]
+				},
+				{
+					href: 'https://github.com/Mopsgamer/mopsgamer.github.io',
+					position: 'right',
+					className: 'header-github-link',
+					'aria-label': 'GitHub repository',
+				},
+			],
 		},
 		footer: {
 			links: [
 				{
-					title: 'Sources',
+					title: 'My socials',
 					items: [
-						{label: 'GitHub', href: 'https://github.com/Mopsgamer/mopsgamer.github.io'}
-					]
-				},
-				{
-					title: 'Me',
-					items: [
-						{label: 'GitHub', href: 'https://github.com/Mopsgamer'}
+						{ label: 'GitHub', href: 'https://github.com/Mopsgamer' },
+						{ label: "NPM Registry", href: "https://www.npmjs.com/~mopsgamer" }
 					]
 				}
 			]
