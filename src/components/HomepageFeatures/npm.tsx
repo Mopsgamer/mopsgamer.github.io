@@ -71,7 +71,7 @@ export function fromList(list: NPMProjectProps[]): JSX.Element {
         <div className="container">
             <h1 className="hero__title">NPM packages</h1>
             {/* <p className="hero__subtitle">text</p> */}
-            <div className="container row" style={{gap: '20px'}}>
+            <div className="container row" style={{gap: '20px', width: "auto"}}>
                 {list.map((props, idx) => (
                     <NPMProject key={idx} {...props} />
                 ))}
