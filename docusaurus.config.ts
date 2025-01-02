@@ -55,12 +55,12 @@ const config: Config = {
 
 	themeConfig: {
 		// Replace with your project's social card
-		image: 'img/mops-avatar.jpg',
+		image: 'img/mops-avatar.png',
 		navbar: {
 			title: 'Mops',
 			logo: {
 				alt: 'mops-avatar',
-				src: 'img/mops-avatar.jpg',
+				src: 'img/mops-avatar.png',
 			},
 			items: [
 				{

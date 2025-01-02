@@ -1,6 +1,7 @@
 import { Icon } from "@iconify/react"
 import { useState, useEffect } from "react";
 import clsx from "clsx";
+import styles from './styles.module.css';
 
 export interface PackageJSON {
     name: string;
@@ -9,10 +10,12 @@ export interface PackageJSON {
     keywords?: string[];
 }
 
-export type NPMProjectProps = {
+export type ProjectProps = {
+    icon?: string;
     title: string;
-    name: string;
-    repo: string;
+    repoFork?: string;
+    npmName?: string;
+    repo?: string;
     description?: string;
 }
 
@@ -32,12 +35,16 @@ function FeatureButton(props: FeatureButtonProps) {
     )
 }
 
-function NPMProject(project: NPMProjectProps) {
-    const { title, name, description, repo } = project
+function Project(project: ProjectProps) {
+    const { title, npmName, description, repo, repoFork, icon = 'bx:package' } = project
     const [info, setInfo] = useState<PackageJSON | undefined>(undefined)
 
     useEffect(() => {
-        scan(project).then(pkgInfo => {
+        if (!npmName) {
+            return;
+        }
+
+        scan({ ...project, npmName }).then(pkgInfo => {
             if (pkgInfo) {
                 setInfo(pkgInfo)
             }
@@ -49,10 +56,12 @@ function NPMProject(project: NPMProjectProps) {
             <div className={clsx('padding-horiz--md')}>
                 <h2 className='col'>
                     <div className='center--vert row' style={{ gap: '10px' }}>
-                        <a className='center--vert' href={`https://www.npmjs.com/package/${name}`} aria-label='Discover on npm'><Icon icon='ri:npmjs-fill' inline={true} height={48}></Icon></a>
+                        <Icon icon={npmName ? 'ri:npmjs-fill' : repoFork ? 'octicon:repo-forked-16' : icon} inline={true} height={48}></Icon>
                         {title}
                     </div>
-                    <div className='center--vert row padding-vert--sm note'>{name}{typeof info?.version === 'string' ? '@' + info.version : ''}</div>
+                    {!npmName?undefined:
+                    <a href={`https://www.npmjs.com/package/${npmName}`} className='center--vert row padding-vert--sm note'>{npmName}{typeof info?.version === 'string' ? '@' + info.version : ''}</a>
+                    }
                     <div className="row pills" style={{ fontSize: "small" }}>
                         {info?.keywords?.map(tag => (<span className="badge badge--secondary">{tag}</span>))}
                     </div>
@@ -60,28 +69,34 @@ function NPMProject(project: NPMProjectProps) {
                 <p>{description || info?.description || 'No description.'}</p>
             </div >
             <div style={{ display: 'flex', gap: '5px', flexDirection: 'column' }}>
-                <FeatureButton aria-label={`Open ${title}repository`} icon='octicon:repo-16' link={repo}>Repository</FeatureButton>
+                {!repo ? undefined :
+                    <FeatureButton aria-label={`Open ${title} repository`} icon='octicon:repo-16' link={"https://github.com/" + repo}>Repository</FeatureButton>
+                }
+                {!repoFork ? undefined :
+                    <FeatureButton aria-label={`Open ${title} repository`} icon='octicon:repo-forked-16' link={"https://github.com/" + repoFork}>Parent repo</FeatureButton>
+                }
             </div>
         </div >
     );
 }
 
-export function fromList(list: NPMProjectProps[]): JSX.Element {
-    return list.length < 1 ? undefined : (
-        <div className="container">
-            <h1 className="hero__title">NPM packages</h1>
-            {/* <p className="hero__subtitle">text</p> */}
-            <div className="container row" style={{gap: '20px', width: "auto"}}>
-                {list.map((props, idx) => (
-                    <NPMProject key={idx} {...props} />
-                ))}
+export function fromList(title: string, list: ProjectProps[]): JSX.Element {
+    return list.length < 1 ? undefined :
+        <section className={clsx(styles.features)}>
+            <div className={clsx('container col')}>
+                <h1 className="hero__title">{title}</h1>
+                {/* <p className="hero__subtitle">text</p> */}
+                <div className="container row" style={{ gap: '20px', width: "auto" }}>
+                    {list.map((props, idx) => (
+                        <Project key={idx} {...props} />
+                    ))}
+                </div>
             </div>
-        </div>
-    )
+        </section>
 }
 
-async function scan(project: NPMProjectProps): Promise<PackageJSON | undefined> {
-    const uriPackageJsonNpm = 'https://cdn.jsdelivr.net/npm/' + project.name + '/package.json'
+async function scan(project: ProjectProps & { npmName: string }): Promise<PackageJSON | undefined> {
+    const uriPackageJsonNpm = 'https://cdn.jsdelivr.net/npm/' + project.npmName + '/package.json'
     const uriPackageJsonGh = 'https://cdn.jsdelivr.net/gh/' + project.repo + '/package.json'
     try {
         let response = await fetch(encodeURI(uriPackageJsonNpm))
